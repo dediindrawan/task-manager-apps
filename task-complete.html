@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager | Tugas Sudah Selesai</title>
+    <!-- information handling referer on http request -->
+    <meta name="referrer" content="no-referrer">
+    <!-- SEO meta tag -->
+    <meta name="description"
+        content="Satu sentuhan untuk mengelola tugas, satu langkah lebih dekat pada pencapaian tujuanmu. Mulai hari ini, jadikan setiap momen produktif dan penuh pencapaian.">
+    <meta name="keywords"
+        content="dedi indrawan, front end developer, web programmer, content creator, task manager web application">
+    <meta name="author" content="Dedi Indrawan">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- open graph meta data -->
+    <meta property="og:title" content="Task Manager Web Application">
+    <meta property="og:description"
+        content="Satu sentuhan untuk mengelola tugas, satu langkah lebih dekat pada pencapaian tujuanmu. Mulai hari ini, jadikan setiap momen produktif dan penuh pencapaian.">
+    <meta property="og:image" content="https://i.ibb.co/gMVDdv5/icon-illustration.png">
+    <meta property="og:url" content="https://dediindrawan.github.io/taskmanager-app/">
+    <!-- favicon -->
+    <link rel="icon" href="src/asset/task-manager-web-application.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="src/asset/task-manager-web-application.ico" type="image/x-icon">
+    <!-- connecting to css file -->
+    <link rel="stylesheet" href="src/css/style.css">
+    <!-- connecting to font awesome icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+
+<body>
+    <div class="task-main-container">
+        <div class="toast"></div>
+
+        <header class="task-header">
+            <form id="form-search" class="form-search">
+                <section class="form-search-input-section">
+                    <input type="search" name="nama tugas" id="search-input" placeholder="Cari nama tugas..."
+                        autocomplete="off">
+                    <small>error message</small>
+                </section>
+                <input type="submit" value="Cari" class="button-search">
+            </form>
+
+            <nav class="breadcrumb">
+                <ul>
+                    <li><a href="index.html">beranda</a></li>
+                    <i class="fa-solid fa-angles-right text-xs"></i>
+                    <li class="opacity-60">tugas sudah selesai</li>
+                </ul>
+            </nav>
+
+            <figure class="banner-image">
+                <img src="src/asset/banner-task-complete.jpg" alt="image">
+            </figure>
+
+            <div class="sticky-navbar">
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="task-form.html">buat tugas baru</a>
+                        </li>
+                        <li>
+                            <a href="task-uncomplete.html">tugas belum selesai</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <button class="button-navbar"><i class="fa-solid fa-angles-right"></i></button>
+            </div>
+
+            <div class="timer-display">
+                <h3 class="date"></h3>
+                <span class="time"></span>
+            </div>
+
+            <!-- <div class="button-group-header">
+                <button class="button-reload" onclick="(location.reload())">muat ulang halaman</button>
+                <button class="button-clear-all">hapus semua tugas</button>
+            </div> -->
+        </header>
+
+        <main class="task-main-wrapper">
+            <h1 class="task-heading">daftar tugas<span class="total-complete">0</span></h1>
+
+            <div>
+                <ul class="task-complete-container"></ul>
+            </div>
+        </main>
+    </div>
+
+    <script src="src/js/app.js"></script>
+    <script src="src/js/main.js"></script>
+</body>
+
+</html>

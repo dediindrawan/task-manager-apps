@@ -1,0 +1,317 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@layer base {
+  html,
+  body {
+    @apply font-poppins text-darken;
+  }
+}
+
+@layer components {
+  /********** INDEX.HTML PAGE STYLE **********/
+  .index-main-container,
+  .form-main-container,
+  .task-main-container {
+    @apply min-h-screen flex flex-col bg-primary relative;
+  }
+
+  .header {
+    @apply flex-1 p-4 text-center flex flex-col justify-center;
+  }
+
+  .header h1 {
+    @apply capitalize text-sm text-white;
+  }
+
+  .header img {
+    @apply w-1/2 mx-auto aspect-square object-cover;
+  }
+
+  .main-index {
+    @apply flex-1 py-6 px-4 text-center flex flex-col items-center rounded-t-3xl text-darken bg-white;
+  }
+
+  .main-index h1 {
+    @apply text-xl capitalize font-semibold;
+  }
+
+  .main-index h1 span {
+    @apply text-secondary;
+  }
+
+  .main-index p {
+    @apply mt-2 mb-5 opacity-70;
+  }
+
+  .button-create-new-task {
+    @apply w-10/12 py-2 capitalize rounded-full border border-primary border-opacity-50 text-white bg-primary shadow-sm shadow-darken-50 hover:bg-white hover:text-primary transition-all duration-300 ease-in-out;
+  }
+
+  .button-options {
+    @apply w-10/12 mt-4 py-2 capitalize rounded-full border border-primary border-opacity-50 text-primary shadow-sm shadow-darken-50 relative hover:bg-primary hover:text-white transition-all duration-300 ease-in-out;
+  }
+
+  .button-options span {
+    @apply py-1 px-2 text-xs font-semibold rounded-full border border-white text-white bg-danger absolute top-2 right-4;
+  }
+
+  .footer-credits {
+    @apply py-2 px-4 text-xs text-center capitalize bg-white;
+  }
+
+  /********** FORM-TODOLIST.HTML PAGE STYLE **********/
+  .toast {
+    @apply p-4 text-sm text-center -translate-y-full fixed top-0 right-0 left-0 z-20 bg-warning transition-all duration-300 ease-in-out;
+  }
+
+  .show-toast {
+    @apply translate-y-0;
+  }
+
+  .form-main-wrapper {
+    @apply flex-1 py-8 px-4 rounded-t-3xl bg-white;
+  }
+
+  .form-main-wrapper h1 {
+    @apply mb-5 capitalize text-center text-xl font-semibold text-primary;
+  }
+
+  .form-main-wrapper form {
+    @apply flex flex-col gap-2;
+  }
+
+  .input-section {
+    @apply flex flex-col;
+  }
+
+  .input-section label {
+    @apply text-sm capitalize text-primary text-opacity-70;
+  }
+
+  .input-section input {
+    @apply w-full p-2 rounded-md outline-none border border-primary border-opacity-50 focus:border-opacity-100 bg-white;
+  }
+
+  .input-section textarea {
+    @apply w-full p-2 rounded-md outline-none resize-none border border-primary border-opacity-50 focus:border-opacity-100 bg-white;
+  }
+
+  .input-section small {
+    @apply hidden italic text-danger;
+  }
+
+  .show-meassage-error {
+    @apply inline;
+  }
+
+  .wrapper-date-input {
+    @apply w-full flex justify-between gap-3;
+  }
+
+  .wrapper-date-input .input-section {
+    @apply flex-1;
+  }
+
+  .notif-info {
+    @apply hidden w-full mt-2 p-2 text-center text-sm rounded-md border border-yellow-600 text-yellow-600;
+  }
+
+  .show-notif-info {
+    @apply inline;
+  }
+
+  .button-save-task {
+    @apply w-full mt-2 p-2 rounded-md capitalize cursor-pointer border border-primary border-opacity-50  text-white bg-primary shadow-sm shadow-darken-50 hover:bg-white hover:text-primary transition-all duration-300 ease-in-out;
+  }
+
+  .wrapper-button-back-to-home {
+    @apply inline-block w-full mt-7 text-center;
+  }
+
+  .wrapper-button-back-to-home a {
+    @apply inline-block text-sm underline text-primary hover:no-underline transition-all duration-300 ease-in-out;
+  }
+
+  /********** TASK-UNCOMPLETE.HTML PAGE STYLE **********/
+  .task-header {
+    @apply p-4 text-center flex flex-col justify-start relative;
+  }
+
+  .form-search {
+    @apply flex gap-2 p-4 fixed top-0 right-0 left-0 z-10 bg-primary;
+  }
+
+  .form-search-input-section {
+    @apply w-full flex flex-col;
+  }
+
+  .form-search-input-section input {
+    @apply h-10 p-2 rounded-md outline-none bg-white;
+  }
+
+  .form-search-input-section small {
+    @apply hidden text-start italic text-white;
+  }
+
+  .button-search {
+    @apply h-10 px-4 rounded-md text-white bg-white bg-opacity-35 cursor-pointer hover:bg-secondary transition-all duration-300 ease-in-out;
+  }
+
+  .breadcrumb {
+    @apply mt-16 mb-4;
+  }
+
+  .breadcrumb ul {
+    @apply text-sm capitalize flex justify-center items-center gap-1 text-white;
+  }
+
+  .banner-image {
+    @apply rounded-md overflow-hidden;
+  }
+
+  .banner-image img {
+    @apply w-full aspect-video;
+  }
+
+  .sticky-navbar {
+    @apply fixed top-40 -left-52 z-20 transition-all duration-300 ease-in-out;
+  }
+
+  .sticky-navbar nav {
+    @apply relative;
+  }
+
+  .sticky-navbar nav ul {
+    @apply text-start capitalize text-white bg-secondary;
+  }
+
+  .sticky-navbar nav ul li a {
+    @apply inline-block w-52 py-4 pl-4 hover:pl-6 hover:bg-darken-50 transition-all duration-300 ease-in-out;
+  }
+
+  .button-navbar {
+    @apply w-6 h-full absolute top-0 -right-6 rounded-tr-md rounded-br-md text-white bg-success;
+  }
+
+  .show-navbar {
+    @apply left-0;
+  }
+
+  .timer-display {
+    @apply mt-4 font-semibold text-white;
+  }
+
+  .button-group-header {
+    @apply mt-4 text-sm flex justify-between gap-4 text-white;
+  }
+
+  .button-reload {
+    @apply p-2 capitalize rounded-md bg-darken hover:bg-secondary transition-all duration-300 ease-in-out;
+  }
+
+  .button-clear-all {
+    @apply p-2 capitalize rounded-md bg-danger hover:bg-secondary transition-all duration-300 ease-in-out;
+  }
+
+  .task-main-wrapper {
+    @apply flex-1 py-8 px-4 rounded-t-3xl bg-white;
+  }
+
+  .task-heading {
+    @apply mb-5 capitalize text-center text-xl font-semibold text-primary relative;
+  }
+
+  .task-heading span {
+    @apply py-1 px-2 text-xs font-semibold rounded-full absolute -top-2 text-white bg-danger;
+  }
+
+  .task-uncomplete-container,
+  .task-complete-container {
+    @apply flex flex-col gap-4;
+  }
+
+  .task-uncomplete-container li,
+  .task-complete-container li {
+    @apply p-4 flex flex-col gap-2 rounded-3xl shadow-sm shadow-darken-50;
+  }
+
+  .info-wrapper {
+    @apply p-4 text-center text-primary;
+  }
+
+  .info-wrapper span {
+    @apply text-9xl;
+  }
+
+  .info-wrapper h1 {
+    @apply mt-4 font-semibold;
+  }
+
+  .task-name-group small,
+  .task-description-group small {
+    @apply text-sm capitalize text-primary text-opacity-70;
+  }
+
+  .task-name-group h1 {
+    @apply pl-2 pb-1 capitalize text-xl font-semibold border-b border-primary border-opacity-30 text-danger;
+  }
+
+  .task-description-group p {
+    @apply pl-2 pb-1 border-b border-primary border-opacity-30 first-letter:capitalize;
+  }
+
+  .wrapper-date-group {
+    @apply w-full flex justify-between;
+  }
+
+  .date-group {
+    @apply flex-1;
+  }
+
+  .date-group small {
+    @apply text-sm capitalize text-primary text-opacity-70;
+  }
+
+  .date-group p {
+    @apply pl-2 pb-1 border-b border-primary border-opacity-30;
+  }
+
+  .time-group {
+    @apply flex-1 text-end;
+  }
+
+  .time-group small {
+    @apply text-sm capitalize text-primary text-opacity-70;
+  }
+
+  .time-group p {
+    @apply pl-2 pb-1 border-b border-primary border-opacity-30;
+  }
+
+  .button-group {
+    @apply pt-2 flex justify-center gap-2;
+  }
+
+  .button-check,
+  .button-update,
+  .button-remove {
+    @apply w-10 h-10 p-2 flex justify-center items-center rounded-md text-white bg-success hover:bg-primary transition-all duration-300 ease-in-out;
+  }
+
+  .button-update {
+    @apply bg-warning;
+  }
+
+  .button-remove {
+    @apply bg-danger;
+  }
+
+  /********** COMPLETED-TODOLIST.HTML PAGE STYLE **********/
+  .task-completed {
+    @apply italic line-through opacity-65;
+  }
+}
