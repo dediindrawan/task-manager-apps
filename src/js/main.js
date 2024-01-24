@@ -40,7 +40,7 @@ function generateObject(id, taskName, taskDescription, taskDateStart, taskTimeSt
 
 document.addEventListener('DOMContentLoaded', () => {
     const taskForm = document.getElementById('task-form');
-    if (location.pathname === '/task-form.html') {
+    if (location.pathname === 'task-form.html') {
         taskForm.addEventListener('submit', (e) => {
             e.preventDefault();
             validateForm();
@@ -102,7 +102,7 @@ function validateForm() {
                     setTimeout(() => {
                         toast.classList.remove('show-toast');
 
-                        location.href = '/task-uncomplete.html';
+                        location.href = 'task-uncomplete.html';
 
                         return true;
                     }, 3000);
@@ -357,7 +357,7 @@ function displayTaskList(tasksObject) {
 
         listContainer.append(buttonGroup);
 
-        if (location.pathname === '/task-uncomplete.html') {
+        if (location.pathname === 'task-uncomplete.html') {
             taskUncompleteContainer.appendChild(listContainer);
         };
     } else {
@@ -400,7 +400,7 @@ function displayTaskList(tasksObject) {
 
         listContainer.append(buttonGroup);
 
-        if (location.pathname === '/task-complete.html') {
+        if (location.pathname === 'task-complete.html') {
             taskCompleteContainer.appendChild(listContainer);
         };
     };
@@ -436,11 +436,11 @@ document.addEventListener(RENDER_EVENT, () => {
         const listElement = displayTaskList(taskItem);
 
         if (taskItem.isComplete === false) {
-            if (location.pathname === '/task-uncomplete.html') {
+            if (location.pathname === 'task-uncomplete.html') {
                 taskUncompleteContainer.append(listElement);
             };
         } else {
-            if (location.pathname === '/task-complete.html') {
+            if (location.pathname === 'task-complete.html') {
                 taskCompleteContainer.append(listElement);
             };
         };
