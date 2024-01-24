@@ -1149,6 +1149,42 @@ html,
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.button-reload {
+  margin-top: 1rem;
+  display: none;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 1.5rem;
+  border-width: 1px;
+  border-color: rgb(76 68 170 / var(--tw-border-opacity));
+  --tw-border-opacity: 0.5;
+  --tw-bg-opacity: 1;
+  background-color: rgb(76 68 170 / var(--tw-bg-opacity));
+  padding: 0.5rem;
+  text-transform: capitalize;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  --tw-shadow-color: rgba(14, 25, 77, 0.5);
+  --tw-shadow: var(--tw-shadow-colored);
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.button-reload:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(76 68 170 / var(--tw-text-opacity));
+}
+
+.show-button-reload {
+  display: inline;
+}
+
 .task-uncomplete-container,
   .task-complete-container {
   display: flex;
@@ -1326,10 +1362,6 @@ html,
 
 .inline {
   display: inline;
-}
-
-.table {
-  display: table;
 }
 
 .text-xs {

@@ -725,6 +725,11 @@ function searchTask() {
                 taskCompleteContainer.innerHTML = '';
             };
 
+            const buttonReloads = document.querySelectorAll('.button-reload');
+            buttonReloads.forEach(buttonReload => {
+                buttonReload.classList.remove('show-button-reload');
+            });
+
             for (const taskItem of data) {
                 if (taskItem.isComplete === false && location.pathname === '/task-uncomplete.html') {
                     if (isSearchMatch(taskItem, searchInput)) {
@@ -732,6 +737,10 @@ function searchTask() {
 
                         if (location.pathname === '/task-uncomplete.html') {
                             taskUncompleteContainer.appendChild(listElement);
+
+                            buttonReloads.forEach(buttonReload => {
+                                buttonReload.classList.add('show-button-reload');
+                            });
                         };
 
                         result = true;
@@ -742,6 +751,10 @@ function searchTask() {
 
                         if (location.pathname === '/task-complete.html') {
                             taskCompleteContainer.appendChild(listElement);
+
+                            buttonReloads.forEach(buttonReload => {
+                                buttonReload.classList.add('show-button-reload');
+                            });
                         };
 
                         result = true;
