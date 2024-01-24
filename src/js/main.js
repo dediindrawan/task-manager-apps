@@ -7,6 +7,9 @@ const STORAGE_KEY = 'Task_Manager_App';
 
 const toasts = document.querySelectorAll('.toast');
 
+const formSearchs = document.querySelectorAll('#form-search');
+const searchInputs = document.querySelectorAll('#search-input');
+
 let taskIndexUpdated = -1;
 
 function isStorageExist() {
@@ -40,17 +43,27 @@ function generateObject(id, taskName, taskDescription, taskDateStart, taskTimeSt
 
 document.addEventListener('DOMContentLoaded', () => {
     const taskForm = document.getElementById('task-form');
-    if (location.pathname === 'task-form.html') {
+    if (location.pathname === '/task-form.html') {
         taskForm.addEventListener('submit', (e) => {
             e.preventDefault();
             validateForm();
         });
     };
 
+    formSearchs.forEach(formSearch => {
+        formSearch.addEventListener('submit', (e) => {
+            e.preventDefault();
+            checkSearchField();
+            searchTask();
+        });
+    });
+
     if (isStorageExist()) {
         loadDataFromStorage();
-        console.log(tasks);
+        console.table(tasks);
     };
+
+    totalTaskInfo();
 });
 
 function validateForm() {
@@ -102,7 +115,7 @@ function validateForm() {
                     setTimeout(() => {
                         toast.classList.remove('show-toast');
 
-                        location.href = 'task-uncomplete.html';
+                        location.href = '/task-uncomplete.html';
 
                         return true;
                     }, 3000);
@@ -357,7 +370,7 @@ function displayTaskList(tasksObject) {
 
         listContainer.append(buttonGroup);
 
-        if (location.pathname === 'task-uncomplete.html') {
+        if (location.pathname === '/task-uncomplete.html') {
             taskUncompleteContainer.appendChild(listContainer);
         };
     } else {
@@ -400,12 +413,78 @@ function displayTaskList(tasksObject) {
 
         listContainer.append(buttonGroup);
 
-        if (location.pathname === 'task-complete.html') {
+        if (location.pathname === '/task-complete.html') {
             taskCompleteContainer.appendChild(listContainer);
         };
     };
 
     return listContainer;
+};
+
+function popupConfirmCheck(id, taskName) {
+    const confirmCheck = confirm(`Apa kamu yakin ingin menandai status "${taskName.toUpperCase()}" sebagai tugas selesai?`);
+
+    if (confirmCheck) {
+        markTaskCompleted(id, taskName);
+    } else {
+        return;
+    };
+};
+
+function markTaskCompleted(id, taskName) {
+    const taskTarget = findTaskId(id);
+
+    if (taskTarget == null) return;
+
+    taskTarget.isComplete = true;
+
+    saveData();
+
+    toasts.forEach(toast => {
+        toast.textContent = `Status nama tugas "${taskName.toUpperCase()}" sudah ditandai sebagai tugas selesai.`;
+        toast.classList.add('show-toast');
+
+        setTimeout(() => {
+            toast.classList.remove('show-toast');
+
+            location.href = '/task-complete.html';
+        }, 3000);
+    });
+
+    document.dispatchEvent(new Event(RENDER_EVENT));
+};
+
+function popupConfirmUndo(id, taskName) {
+    const confirmUndo = confirm(`Apa kamu yakin ingin mengubah status "${taskName.toUpperCase()}" sebagai tugas belum selesai?`);
+
+    if (confirmUndo) {
+        markTaskUncompleted(id, taskName);
+    } else {
+        return;
+    };
+};
+
+function markTaskUncompleted(id, taskName) {
+    const taskTarget = findTaskId(id);
+
+    if (taskTarget == null) return;
+
+    taskTarget.isComplete = false;
+
+    saveData();
+
+    toasts.forEach(toast => {
+        toast.textContent = `Status nama tugas "${taskName.toUpperCase()}" sudah ditandai sebagai tugas belum selesai.`;
+        toast.classList.add('show-toast');
+
+        setTimeout(() => {
+            toast.classList.remove('show-toast');
+
+            location.href = '/task-uncomplete.html';
+        }, 3000);
+    });
+
+    document.dispatchEvent(new Event(RENDER_EVENT));
 };
 
 function findTaskId(id) {
@@ -418,6 +497,187 @@ function findTaskId(id) {
     return null;
 };
 
+function popupConfirmUpdate(id, taskName, taskDescription, taskDateStart, taskTimeStart, taskDateEnd, taskTimeEnd) {
+    const confirmUpdate = confirm(`Apa kamu yakin ingin melakukan perubahan pada nama tugas "${taskName.toUpperCase()}"?`);
+
+    if (confirmUpdate) {
+        location.href = '/task-form.html';
+
+        localStorage.setItem('Get_Task_Item_For_Update', JSON.stringify({
+            id,
+            taskName,
+            taskDescription,
+            taskDateStart,
+            taskTimeStart,
+            taskDateEnd,
+            taskTimeEnd
+        }));
+    } else {
+        return;
+    };
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (location.pathname === '/task-form.html') {
+        const getTaskItemForUpdate = localStorage.getItem('Get_Task_Item_For_Update');
+
+        if (getTaskItemForUpdate) {
+            const data = JSON.parse(getTaskItemForUpdate);
+            getTaskItemSelected(data);
+
+            localStorage.removeItem('Get_Task_Item_For_Update');
+        };
+    };
+});
+
+function getTaskItemSelected(data) {
+    const taskNameInput = document.getElementById('task-name');
+    const taskDescriptionInput = document.getElementById('task-description');
+    const taskDateStartInput = document.getElementById('task-date-start');
+    const taskTimeStartInput = document.getElementById('task-time-start');
+    const taskDateEndInput = document.getElementById('task-date-end');
+    const taskTimeEndInput = document.getElementById('task-time-end');
+
+    taskNameInput.value = data.taskName.trim();
+    taskDescriptionInput.value = data.taskDescription.trim();
+    taskDateStartInput.value = data.taskDateStart;
+    taskTimeStartInput.value = data.taskTimeStart;
+    taskDateEndInput.value = data.taskDateEnd;
+    taskTimeEndInput.value = data.taskTimeEnd;
+
+    taskIndexUpdated = data.id;
+};
+
+function taskUpdated(taskNameInput, taskDescriptionInput, taskDateStartInput, taskTimeStartInput, taskDateEndInput, taskTimeEndInput) {
+    let taskItem = tasks.find(task => task.id === taskIndexUpdated);
+
+    if (taskIndexUpdated !== -1) {
+        if (taskItem) {
+            taskItem.taskName = taskNameInput;
+            taskItem.taskDescription = taskDescriptionInput;
+            taskItem.taskDateStart = taskDateStartInput;
+            taskItem.taskTimeStart = taskTimeStartInput;
+            taskItem.taskDateEnd = taskDateEndInput;
+            taskItem.taskTimeEnd = taskTimeEndInput;
+        };
+    };
+
+    taskItem = -1;
+
+    saveUpdate();
+};
+
+function saveUpdate() {
+    saveData();
+
+    toasts.forEach(toast => {
+        toast.textContent = 'Tugas sudah berhasil diperbarui dan disimpan.';
+        toast.classList.add('show-toast');
+
+        setTimeout(() => {
+            toast.classList.remove('show-toast');
+
+            location.href = '/index.html';
+        }, 3000);
+    });
+};
+
+function popupConfirmRemove(id, taskName) {
+    const confirmRemove = confirm(`Apa kamu yakin ingin menghapus "${taskName.toUpperCase()}" dari daftar tugas?`);
+
+    if (confirmRemove) {
+        taskRemoved(id, taskName);
+    } else {
+        return;
+    };
+};
+
+function taskRemoved(id, taskName) {
+    const taskTarget = findTaskId(id);
+
+    if (taskTarget === -1) return;
+
+    tasks.splice(taskTarget, 1);
+
+    saveData();
+
+    toasts.forEach(toast => {
+        toast.textContent = `"${taskName.toUpperCase()}" berhasil dihapus dari daftar tugas.`;
+        toast.classList.add('show-toast');
+
+        setTimeout(() => {
+            toast.classList.remove('show-toast');
+
+            location.reload();
+        }, 3000);
+    });
+
+    document.dispatchEvent(new Event(RENDER_EVENT));
+};
+
+function totalTaskInfo() {
+    if (location.pathname === '/task-uncomplete.html') {
+        const taskUncompleteContainer = document.querySelector('.task-uncomplete-container');
+        const childrenElement = taskUncompleteContainer.children;
+        const totalLength = childrenElement.length;
+
+        if (totalLength === 0) {
+            const infoIcon = document.createElement('span');
+            infoIcon.innerHTML = `<i class="fa-solid fa-clipboard-list"></i>`;
+
+            const messageInfo = document.createElement('h1');
+            messageInfo.innerText = 'Belum ada tugas apapun disini.';
+
+            const infoWrapper = document.createElement('span');
+            infoWrapper.classList.add('info-wrapper');
+            infoWrapper.appendChild(infoIcon);
+            infoWrapper.appendChild(messageInfo);
+
+            taskUncompleteContainer.appendChild(infoWrapper);
+        } else {
+            document.querySelector('.total-uncomplete').innerText = totalLength;
+        };
+    } else {
+        if (location.pathname === '/task-complete.html') {
+            const taskCompleteContainer = document.querySelector('.task-complete-container');
+            const childrenElement = taskCompleteContainer.children;
+            const totalLength = childrenElement.length;
+
+            if (totalLength === 0) {
+                const infoIcon = document.createElement('span');
+                infoIcon.innerHTML = `<i class="fa-solid fa-clipboard-list"></i>`;
+
+                const messageInfo = document.createElement('h1');
+                messageInfo.innerText = 'Belum ada tugas apapun disini.';
+
+                const infoWrapper = document.createElement('span');
+                infoWrapper.classList.add('info-wrapper');
+                infoWrapper.appendChild(infoIcon);
+                infoWrapper.appendChild(messageInfo);
+
+                taskCompleteContainer.appendChild(infoWrapper);
+            } else {
+                document.querySelector('.total-complete').innerText = totalLength;
+            };
+        };
+    };
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    const serializedData = localStorage.getItem(STORAGE_KEY);
+    const data = JSON.parse(serializedData);
+
+    if (data !== null) {
+        if (location.pathname === '/index.html') {
+            const taskUncompletes = data.filter(uncompletes => uncompletes.isComplete === false);
+            document.querySelector('.index-task-uncomplete').textContent = taskUncompletes.length;
+
+            const taskCompletes = data.filter(completes => completes.isComplete === true);
+            document.querySelector('.index-task-complete').textContent = taskCompletes.length;
+        };
+    };
+});
+
 function findTaskIndex(id) {
     for (const index in tasks) {
         if (tasks[index].id === id) {
@@ -428,6 +688,90 @@ function findTaskIndex(id) {
     return -1;
 };
 
+function checkSearchField() {
+    searchInputs.forEach(searchInput => {
+        const searchErrorMsg = searchInput.nextElementSibling;
+        searchErrorMsg.style.display = 'inline';
+
+        if (searchInput.value.trim() == '') {
+            searchErrorMsg.textContent = 'Masukkan nama tugas yang ingin dicari!';
+            document.querySelector('.form-search').style.paddingBottom = '0.5rem';
+        } else {
+            if (searchInput.value.trim() !== '') {
+                searchErrorMsg.style.display = 'none';
+                document.querySelector('.form-search').style.paddingBottom = '1rem';
+
+                searchTask();
+            };
+        };
+    });
+};
+
+function searchTask() {
+    searchInputs.forEach(isSearchInput => {
+        const searchInput = isSearchInput.value.trim();
+        const serializedData = localStorage.getItem(STORAGE_KEY);
+
+        if (serializedData) {
+            const data = JSON.parse(serializedData);
+
+            let result = false;
+
+            const taskUncompleteContainer = document.querySelector('.task-uncomplete-container');
+            if (location.pathname === '/task-uncomplete.html') {
+                taskUncompleteContainer.innerHTML = '';
+            };
+
+            const taskCompleteContainer = document.querySelector('.task-complete-container');
+            if (location.pathname === '/task-complete.html') {
+                taskCompleteContainer.innerHTML = '';
+            };
+
+            for (const taskItem of data) {
+                if (taskItem.isComplete === false && location.pathname === '/task-uncomplete.html') {
+                    if (isSearchMatch(taskItem, searchInput)) {
+                        const listElement = displayTaskList(taskItem);
+
+                        if (location.pathname === '/task-uncomplete.html') {
+                            taskUncompleteContainer.appendChild(listElement);
+                        };
+
+                        result = true;
+                    };
+                } else if (taskItem.isComplete === true && location.pathname === '/task-complete.html') {
+                    if (isSearchMatch(taskItem, searchInput)) {
+                        const listElement = displayTaskList(taskItem);
+
+                        if (location.pathname === '/task-complete.html') {
+                            taskCompleteContainer.appendChild(listElement);
+                        };
+
+                        result = true;
+                    };
+                }
+            };
+
+            if (!result) {
+                toasts.forEach(toast => {
+                    toast.textContent = `"${searchInput.toUpperCase()}" tidak ada didalam daftar tugas`;
+                    toast.classList.add('show-toast');
+
+                    setTimeout(() => {
+                        toast.classList.remove('show-toast');
+
+                        location.reload();
+                    }, 3000);
+                });
+            };
+        };
+    });
+};
+
+function isSearchMatch(taskItem, searchInput) {
+    const isTaskName = taskItem.taskName;
+    return isTaskName.includes(searchInput.toLowerCase());
+};
+
 document.addEventListener(RENDER_EVENT, () => {
     const taskUncompleteContainer = document.querySelector('.task-uncomplete-container');
     const taskCompleteContainer = document.querySelector('.task-complete-container');
@@ -436,11 +780,11 @@ document.addEventListener(RENDER_EVENT, () => {
         const listElement = displayTaskList(taskItem);
 
         if (taskItem.isComplete === false) {
-            if (location.pathname === 'task-uncomplete.html') {
+            if (location.pathname === '/task-uncomplete.html') {
                 taskUncompleteContainer.append(listElement);
             };
         } else {
-            if (location.pathname === 'task-complete.html') {
+            if (location.pathname === '/task-complete.html') {
                 taskCompleteContainer.append(listElement);
             };
         };

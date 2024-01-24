@@ -1213,6 +1213,23 @@ html,
   --tw-shadow: var(--tw-shadow-colored);
 }
 
+.info-wrapper {
+  padding: 1rem;
+  text-align: center;
+  --tw-text-opacity: 1;
+  color: rgb(76 68 170 / var(--tw-text-opacity));
+}
+
+.info-wrapper span {
+  font-size: 8rem;
+  line-height: 1;
+}
+
+.info-wrapper h1 {
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
 .task-name-group small,
   .task-description-group small {
   font-size: 0.875rem;
@@ -1354,6 +1371,10 @@ html,
   display: inline;
 }
 
+.table {
+  display: table;
+}
+
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
@@ -1361,6 +1382,10 @@ html,
 
 .opacity-60 {
   opacity: 0.6;
+}
+
+.filter {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
 .transition-all {
