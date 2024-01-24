@@ -54,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
         formSearch.addEventListener('submit', (e) => {
             e.preventDefault();
             checkSearchField();
-            searchTask();
         });
     });
 
@@ -748,7 +747,7 @@ function searchTask() {
 
                         result = true;
                     };
-                }
+                };
             };
 
             if (!result) {
