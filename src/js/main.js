@@ -59,7 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (isStorageExist()) {
         loadDataFromStorage();
-        console.table(tasks);
     };
 
     totalTaskInfo();
@@ -774,6 +773,12 @@ function isSearchMatch(taskItem, searchInput) {
 document.addEventListener(RENDER_EVENT, () => {
     const taskUncompleteContainer = document.querySelector('.task-uncomplete-container');
     const taskCompleteContainer = document.querySelector('.task-complete-container');
+
+    tasks.sort(function (a, b) {
+        const dateA = new Date(a.taskDateStart);
+        const dateB = new Date(b.taskDateStart);
+        return dateA - dateB;
+    });
 
     for (const taskItem of tasks) {
         const listElement = displayTaskList(taskItem);

@@ -205,18 +205,6 @@
     @apply mt-4 font-semibold text-white;
   }
 
-  .button-group-header {
-    @apply mt-4 text-sm flex justify-between gap-4 text-white;
-  }
-
-  .button-reload {
-    @apply p-2 capitalize rounded-md bg-darken hover:bg-secondary transition-all duration-300 ease-in-out;
-  }
-
-  .button-clear-all {
-    @apply p-2 capitalize rounded-md bg-danger hover:bg-secondary transition-all duration-300 ease-in-out;
-  }
-
   .task-main-wrapper {
     @apply flex-1 py-8 px-4 rounded-t-3xl bg-white;
   }
