@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     totalTaskInfo();
+    totalTaskInfoOnMainPage();
 });
 
 function validateForm() {
@@ -673,21 +674,20 @@ function totalTaskInfo() {
 
 function totalTaskInfoOnMainPage() {
     const serializedData = localStorage.getItem(STORAGE_KEY);
-    const data = JSON.parse(serializedData);
 
-    if (data !== null) {
-        if (location.pathname === '/index.html') {
-            const taskUncompletes = data.filter(uncompletes => uncompletes.isComplete === false);
-            document.querySelector('.index-task-uncomplete').textContent = taskUncompletes.length;
+    if (serializedData) {
+        const data = JSON.parse(serializedData);
 
-            const taskCompletes = data.filter(completes => completes.isComplete === true);
-            document.querySelector('.index-task-complete').textContent = taskCompletes.length;
+        if (data !== null) {
+            if (location.pathname === '/index.html') {
+                const taskUncompletes = data.filter(uncompletes => uncompletes.isComplete === false);
+                document.querySelector('.index-task-uncomplete').textContent = taskUncompletes.length;
+
+                const taskCompletes = data.filter(completes => completes.isComplete === true);
+                document.querySelector('.index-task-complete').textContent = taskCompletes.length;
+            };
         };
     };
-};
-
-window.onload = function () {
-    totalTaskInfoOnMainPage();
 };
 
 function checkSearchField() {
