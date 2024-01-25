@@ -28,7 +28,7 @@
   }
 
   .header img {
-    @apply w-1/2 mx-auto aspect-square object-cover;
+    @apply w-1/2 mx-auto aspect-square object-cover lg:w-1/5;
   }
 
   .main-index {

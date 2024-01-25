@@ -624,6 +624,12 @@ html,
      object-fit: cover;
 }
 
+@media (min-width: 1024px) {
+  .header img {
+    width: 20%;
+  }
+}
+
 .main-index {
   display: flex;
   flex: 1 1 0%;
