@@ -50,18 +50,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    formSearchs.forEach(formSearch => {
-        formSearch.addEventListener('submit', (e) => {
-            e.preventDefault();
-            checkSearchField();
+    if (location.pathname === '/task-uncomplete.html' || location.pathname === '/task-complete.html') {
+        formSearchs.forEach(formSearch => {
+            formSearch.addEventListener('submit', (e) => {
+                e.preventDefault();
+                checkSearchField();
+            });
         });
-    });
+    };
 
     if (isStorageExist()) {
         loadDataFromStorage();
     };
 
-    totalTaskInfo();
+    if (location.pathname === '/index.html' || location.pathname === '/task-uncomplete.html' || location.pathname === '/task-complete.html') {
+        totalTaskInfo();
+    };
 });
 
 function validateForm() {
@@ -591,7 +595,7 @@ function popupConfirmRemove(id, taskName) {
 };
 
 function taskRemoved(id, taskName) {
-    const taskTarget = findTaskId(id);
+    const taskTarget = findTaskIndex(id);
 
     if (taskTarget === -1) return;
 
@@ -611,6 +615,16 @@ function taskRemoved(id, taskName) {
     });
 
     document.dispatchEvent(new Event(RENDER_EVENT));
+};
+
+function findTaskIndex(id) {
+    for (const index in tasks) {
+        if (tasks[index].id === id) {
+            return index;
+        };
+    };
+
+    return -1;
 };
 
 function totalTaskInfo() {
@@ -675,16 +689,6 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     };
 });
-
-function findTaskIndex(id) {
-    for (const index in tasks) {
-        if (tasks[index].id === id) {
-            return index;
-        };
-    };
-
-    return -1;
-};
 
 function checkSearchField() {
     searchInputs.forEach(searchInput => {
