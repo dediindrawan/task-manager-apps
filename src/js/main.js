@@ -678,18 +678,12 @@ function totalTaskInfoOnMainPage() {
     if (serializedData) {
         const data = JSON.parse(serializedData);
 
-        if (data !== null) {
-            if (location.pathname === '/index.html') {
-                const taskUncompletes = data.filter(uncompletes => uncompletes.isComplete === false);
-                if (taskUncompletes) {
-                    document.querySelector('.index-task-uncomplete').textContent = taskUncompletes.length;
-                };
+        if (data !== null && location.pathname === '/index.html') {
+            const taskUncompletes = data.filter(task => !task.isComplete);
+            document.querySelector('.index-task-uncomplete').textContent = taskUncompletes.length;
 
-                const taskCompletes = data.filter(completes => completes.isComplete === true);
-                if (taskCompletes) {
-                    document.querySelector('.index-task-complete').textContent = taskCompletes.length;
-                };
-            };
+            const taskCompletes = data.filter(task => task.isComplete);
+            document.querySelector('.index-task-complete').textContent = taskCompletes.length;
         };
     };
 };
