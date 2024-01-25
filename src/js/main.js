@@ -50,22 +50,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    if (location.pathname === '/task-uncomplete.html' || location.pathname === '/task-complete.html') {
-        formSearchs.forEach(formSearch => {
-            formSearch.addEventListener('submit', (e) => {
-                e.preventDefault();
-                checkSearchField();
-            });
+    formSearchs.forEach(formSearch => {
+        formSearch.addEventListener('submit', (e) => {
+            e.preventDefault();
+            checkSearchField();
         });
-    };
+    });
 
     if (isStorageExist()) {
         loadDataFromStorage();
     };
 
-    if (location.pathname === '/index.html' || location.pathname === '/task-uncomplete.html' || location.pathname === '/task-complete.html') {
-        totalTaskInfo();
-    };
+    totalTaskInfo();
+    totalTaskInfoOnMainPage();
 });
 
 function validateForm() {
@@ -675,7 +672,7 @@ function totalTaskInfo() {
     };
 };
 
-document.addEventListener('DOMContentLoaded', () => {
+function totalTaskInfoOnMainPage() {
     const serializedData = localStorage.getItem(STORAGE_KEY);
     const data = JSON.parse(serializedData);
 
@@ -688,7 +685,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('.index-task-complete').textContent = taskCompletes.length;
         };
     };
-});
+};
 
 function checkSearchField() {
     searchInputs.forEach(searchInput => {
@@ -699,12 +696,10 @@ function checkSearchField() {
             searchErrorMsg.textContent = 'Masukkan nama tugas yang ingin dicari!';
             document.querySelector('.form-search').style.paddingBottom = '0.5rem';
         } else {
-            if (searchInput.value.trim() !== '') {
-                searchErrorMsg.style.display = 'none';
-                document.querySelector('.form-search').style.paddingBottom = '1rem';
+            searchErrorMsg.style.display = 'none';
+            document.querySelector('.form-search').style.paddingBottom = '1rem';
 
-                searchTask();
-            };
+            searchTask();
         };
     });
 };
