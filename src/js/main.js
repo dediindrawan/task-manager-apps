@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     totalTaskInfo();
+    totalTaskInfoOnMainPage()
 });
 
 function validateForm() {
@@ -809,6 +810,4 @@ document.addEventListener(RENDER_EVENT, () => {
             };
         };
     };
-
-    totalTaskInfoOnMainPage();
 });
