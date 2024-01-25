@@ -735,7 +735,7 @@ function searchTask() {
             });
 
             for (const taskItem of data) {
-                if (taskItem.isComplete === false && location.pathname === '/task-uncomplete.html') {
+                if (taskItem.isComplete === false) {
                     if (isSearchMatch(taskItem, searchInput)) {
                         const listElement = displayTaskList(taskItem);
 
@@ -749,7 +749,7 @@ function searchTask() {
 
                         result = true;
                     };
-                } else if (taskItem.isComplete === true && location.pathname === '/task-complete.html') {
+                } else if (taskItem.isComplete === true) {
                     if (isSearchMatch(taskItem, searchInput)) {
                         const listElement = displayTaskList(taskItem);
 
