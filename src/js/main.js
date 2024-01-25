@@ -692,17 +692,16 @@ function checkSearchField() {
         const searchErrorMsg = searchInput.nextElementSibling;
         searchErrorMsg.style.display = 'inline';
 
-        if (searchInput.value.trim() == '') {
+        if (searchInput.value.trim() === '') {
             searchErrorMsg.textContent = 'Masukkan nama tugas yang ingin dicari!';
             document.querySelector('.form-search').style.paddingBottom = '0.5rem';
         } else {
             searchErrorMsg.style.display = 'none';
             document.querySelector('.form-search').style.paddingBottom = '1rem';
-
             searchTask();
-        };
+        }
     });
-};
+}
 
 function searchTask() {
     searchInputs.forEach(isSearchInput => {
@@ -711,8 +710,6 @@ function searchTask() {
 
         if (serializedData) {
             const data = JSON.parse(serializedData);
-
-            let result = false;
 
             const taskUncompleteContainer = document.querySelector('.task-uncomplete-container');
             if (location.pathname === '/task-uncomplete.html') {
@@ -729,27 +726,22 @@ function searchTask() {
                 buttonReload.classList.remove('show-button-reload');
             });
 
+            let result = false;
+
             for (const taskItem of data) {
-                if (taskItem.isComplete === false && location.pathname === '/task-uncomplete.html') {
+                const isTaskIncomplete = taskItem.isComplete === false;
+                const isTaskComplete = taskItem.isComplete === true;
+
+                if ((isTaskIncomplete && location.pathname === '/task-uncomplete.html') ||
+                    (isTaskComplete && location.pathname === '/task-complete.html')) {
+
                     if (isSearchMatch(taskItem, searchInput)) {
                         const listElement = displayTaskList(taskItem);
 
-                        if (location.pathname === '/task-uncomplete.html') {
-                            taskUncompleteContainer.appendChild(listElement);
+                        if (location.pathname === '/task-uncomplete.html' || location.pathname === '/task-complete.html') {
+                            const container = isTaskIncomplete ? taskUncompleteContainer : taskCompleteContainer;
 
-                            buttonReloads.forEach(buttonReload => {
-                                buttonReload.classList.add('show-button-reload');
-                            });
-                        };
-
-                        result = true;
-                    };
-                } else if (taskItem.isComplete === true && location.pathname === '/task-complete.html') {
-                    if (isSearchMatch(taskItem, searchInput)) {
-                        const listElement = displayTaskList(taskItem);
-
-                        if (location.pathname === '/task-complete.html') {
-                            taskCompleteContainer.appendChild(listElement);
+                            container.appendChild(listElement);
 
                             buttonReloads.forEach(buttonReload => {
                                 buttonReload.classList.add('show-button-reload');
@@ -768,7 +760,6 @@ function searchTask() {
 
                     setTimeout(() => {
                         toast.classList.remove('show-toast');
-
                         location.reload();
                     }, 3000);
                 });
