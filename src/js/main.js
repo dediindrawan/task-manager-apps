@@ -62,7 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     totalTaskInfo();
-    totalTaskInfoOnMainPage();
 });
 
 function validateForm() {
@@ -686,6 +685,7 @@ function totalTaskInfoOnMainPage() {
         };
     };
 };
+totalTaskInfoOnMainPage();
 
 function checkSearchField() {
     searchInputs.forEach(searchInput => {
