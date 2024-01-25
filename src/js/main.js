@@ -675,13 +675,13 @@ function totalTaskInfoOnMainPage() {
     const serializedData = localStorage.getItem(STORAGE_KEY);
 
     if (serializedData) {
-        const data = JSON.parse(serializedData);
+        let data = JSON.parse(serializedData);
 
         if (data !== null && location.pathname === '/index.html') {
-            const taskUncompletes = data.filter(task => !task.isComplete);
+            let taskUncompletes = data.filter(task => !task.isComplete);
             document.querySelector('.index-task-uncomplete').textContent = taskUncompletes.length;
 
-            const taskCompletes = data.filter(task => task.isComplete);
+            let taskCompletes = data.filter(task => task.isComplete);
             document.querySelector('.index-task-complete').textContent = taskCompletes.length;
         };
     };
@@ -700,7 +700,11 @@ function checkSearchField() {
             document.querySelector('.form-search').style.paddingBottom = '1rem';
 
             searchTask();
+
+            return true
         };
+
+        return false;
     });
 };
 
@@ -710,7 +714,7 @@ function searchTask() {
         const serializedData = localStorage.getItem(STORAGE_KEY);
 
         if (serializedData) {
-            const data = JSON.parse(serializedData);
+            let data = JSON.parse(serializedData);
 
             let result = false;
 
