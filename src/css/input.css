@@ -210,11 +210,11 @@
   }
 
   .block-element {
-    @apply md:w-full md:min-h-screen md:max-h-screen md:p-4;
+    @apply bg-white py-8 rounded-t-3xl md:w-full md:min-h-screen md:max-h-screen md:p-4;
   }
 
   .task-main-wrapper {
-    @apply flex-1 py-8 px-4 rounded-t-3xl bg-white md:h-full md:pt-0 md:rounded-b-3xl md:overflow-y-auto;
+    @apply flex-1 px-4 rounded-t-3xl bg-white md:h-full md:pt-0 md:rounded-b-3xl md:overflow-y-auto;
   }
 
   .task-heading {
