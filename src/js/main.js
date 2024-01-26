@@ -1,7 +1,5 @@
 'use strict';
 
-alert('halooo')
-
 const tasks = [];
 const RENDER_EVENT = 'render-event';
 const SAVED_EVENT = 'saved-event';
@@ -68,10 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (isStorageExist()) {
         loadDataFromStorage();
+        totalTaskInfoOnMainPage();
+        totalTaskInfo();
     };
-
-    totalTaskInfo();
-    totalTaskInfoOnMainPage();
 });
 
 function validateForm() {
