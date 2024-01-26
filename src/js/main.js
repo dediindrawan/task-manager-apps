@@ -679,15 +679,17 @@ function totalTaskInfo() {
 };
 
 function totalTaskInfoOnMainPage() {
-    if (location.pathname === '/index.html') {
-        const indexTaskUncompletes = document.querySelector('.index-task-uncomplete');
-        const indexTaskCompletes = document.querySelector('.index-task-complete');
-        for (let i = 0; i < tasks.length; i++) {
-            if (tasks[i].isComplete === false) {
-                Number(indexTaskUncompletes.innerText++);
-            } else {
-                Number(indexTaskCompletes.innerText++);
-            };
+    const serializedData = localStorage.getItem(STORAGE_KEY);
+
+    if (serializedData) {
+        const data = JSON.parse(serializedData);
+
+        if (data !== null && location.pathname === '/index.html') {
+            const taskUncompletes = data.filter(task => !task.isComplete);
+            document.querySelector('.index-task-uncomplete').textContent = taskUncompletes.length;
+
+            const taskCompletes = data.filter(task => task.isComplete);
+            document.querySelector('.index-task-complete').textContent = taskCompletes.length;
         };
     };
 };
