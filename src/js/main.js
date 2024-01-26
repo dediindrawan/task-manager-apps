@@ -1,4 +1,4 @@
-// 'use strict';
+'use strict';
 
 const tasks = [];
 const RENDER_EVENT = 'render-event';
@@ -45,15 +45,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const taskForm = document.getElementById('task-form');
     if (location.pathname === '/task-form.html') {
         taskForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            validateForm();
+            if (!validateForm()) {
+                e.preventDefault();
+            } else {
+                taskForm.submit();
+            };
         });
     };
 
     formSearchs.forEach(formSearch => {
         formSearch.addEventListener('submit', (e) => {
-            e.preventDefault();
-            checkSearchField();
+            if (!checkSearchField()) {
+                e.preventDefault();
+            } else {
+                searchTask();
+                formSearch.submit();
+            };
         });
     });
 
@@ -62,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     totalTaskInfo();
-    totalTaskInfoOnMainPage()
+    totalTaskInfoOnMainPage();
 });
 
 function validateForm() {
@@ -193,7 +200,7 @@ function addTask() {
         const generatedID = generateId();
         const tasksObject = generateObject(
             generatedID,
-            taskNameInput,
+            taskNameInput.toLowerCase(),
             taskDescriptionInput,
             taskDateStartInput,
             taskTimeStartInput,
@@ -205,7 +212,7 @@ function addTask() {
         tasks.push(tasksObject);
     } else {
         taskUpdated(
-            taskNameInput,
+            taskNameInput.toLowerCase(),
             taskDescriptionInput,
             taskDateStartInput,
             taskTimeStartInput,
@@ -740,7 +747,7 @@ function searchTask() {
                         const listElement = displayTaskList(taskItem);
 
                         if (location.pathname === '/task-uncomplete.html') {
-                            taskUncompleteContainer.appendChild(listElement);
+                            taskUncompleteContainer.append(listElement);
 
                             buttonReloads.forEach(buttonReload => {
                                 buttonReload.classList.add('show-button-reload');
@@ -754,7 +761,7 @@ function searchTask() {
                         const listElement = displayTaskList(taskItem);
 
                         if (location.pathname === '/task-complete.html') {
-                            taskCompleteContainer.appendChild(listElement);
+                            taskCompleteContainer.append(listElement);
 
                             buttonReloads.forEach(buttonReload => {
                                 buttonReload.classList.add('show-button-reload');
