@@ -598,6 +598,14 @@ html,
   background-color: rgb(76 68 170 / var(--tw-bg-opacity));
 }
 
+@media (min-width: 768px) {
+  .index-main-container,
+  .form-main-container,
+  .task-main-container {
+    flex-direction: row;
+  }
+}
+
 .header {
   display: flex;
   flex: 1 1 0%;
@@ -615,6 +623,13 @@ html,
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+@media (min-width: 768px) {
+  .header h1 {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+}
+
 .header img {
   margin-left: auto;
   margin-right: auto;
@@ -624,9 +639,12 @@ html,
      object-fit: cover;
 }
 
-@media (min-width: 1024px) {
-  .header img {
-    width: 20%;
+@media (min-width: 768px) {
+  .group-element {
+    display: flex;
+    width: 60%;
+    flex-direction: column;
+    padding: 2rem;
   }
 }
 
@@ -648,11 +666,24 @@ html,
   color: rgb(14 25 77 / var(--tw-text-opacity));
 }
 
+@media (min-width: 768px) {
+  .main-index {
+    justify-content: center;
+  }
+}
+
 .main-index h1 {
   font-size: 1.25rem;
   line-height: 1.75rem;
   font-weight: 600;
   text-transform: capitalize;
+}
+
+@media (min-width: 768px) {
+  .main-index h1 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
 }
 
 .main-index h1 span {
@@ -696,6 +727,12 @@ html,
   color: rgb(76 68 170 / var(--tw-text-opacity));
 }
 
+@media (min-width: 768px) {
+  .button-create-new-task {
+    width: 50%;
+  }
+}
+
 .button-options {
   position: relative;
   margin-top: 1rem;
@@ -724,6 +761,12 @@ html,
   background-color: rgb(76 68 170 / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+@media (min-width: 768px) {
+  .button-options {
+    width: 50%;
+  }
 }
 
 .button-options span {
@@ -758,6 +801,13 @@ html,
   font-size: 0.75rem;
   line-height: 1rem;
   text-transform: capitalize;
+}
+
+@media (min-width: 768px) {
+  .footer-credits {
+    border-bottom-right-radius: 1.5rem;
+    border-bottom-left-radius: 1.5rem;
+  }
 }
 
 /********** FORM-TODOLIST.HTML PAGE STYLE **********/

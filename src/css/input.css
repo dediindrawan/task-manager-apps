@@ -16,7 +16,7 @@
   .index-main-container,
   .form-main-container,
   .task-main-container {
-    @apply min-h-screen flex flex-col bg-primary relative;
+    @apply min-h-screen flex flex-col bg-primary relative md:flex-row;
   }
 
   .header {
@@ -24,19 +24,23 @@
   }
 
   .header h1 {
-    @apply capitalize text-sm text-white;
+    @apply capitalize text-sm text-white md:text-xl;
   }
 
   .header img {
-    @apply w-1/2 mx-auto aspect-square object-cover lg:w-1/5;
+    @apply w-1/2 mx-auto aspect-square object-cover;
+  }
+
+  .group-element {
+    @apply md:w-3/5 md:p-8 md:flex md:flex-col;
   }
 
   .main-index {
-    @apply flex-1 py-6 px-4 text-center flex flex-col items-center rounded-t-3xl text-darken bg-white;
+    @apply flex-1 py-6 px-4 text-center flex flex-col items-center rounded-t-3xl text-darken bg-white md:justify-center;
   }
 
   .main-index h1 {
-    @apply text-xl capitalize font-semibold;
+    @apply text-xl capitalize font-semibold md:text-2xl;
   }
 
   .main-index h1 span {
@@ -48,11 +52,11 @@
   }
 
   .button-create-new-task {
-    @apply w-10/12 py-2 capitalize rounded-full border border-primary border-opacity-50 text-white bg-primary shadow-sm shadow-darken-50 hover:bg-white hover:text-primary transition-all duration-300 ease-in-out;
+    @apply w-10/12 py-2 capitalize rounded-full border border-primary border-opacity-50 text-white bg-primary shadow-sm shadow-darken-50 hover:bg-white hover:text-primary transition-all duration-300 ease-in-out md:w-1/2;
   }
 
   .button-options {
-    @apply w-10/12 mt-4 py-2 capitalize rounded-full border border-primary border-opacity-50 text-primary shadow-sm shadow-darken-50 relative hover:bg-primary hover:text-white transition-all duration-300 ease-in-out;
+    @apply w-10/12 mt-4 py-2 capitalize rounded-full border border-primary border-opacity-50 text-primary shadow-sm shadow-darken-50 relative hover:bg-primary hover:text-white transition-all duration-300 ease-in-out md:w-1/2;
   }
 
   .button-options span {
@@ -60,7 +64,7 @@
   }
 
   .footer-credits {
-    @apply py-2 px-4 text-xs text-center capitalize bg-white;
+    @apply py-2 px-4 text-xs text-center capitalize bg-white md:rounded-b-3xl;
   }
 
   /********** FORM-TODOLIST.HTML PAGE STYLE **********/
