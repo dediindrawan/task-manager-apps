@@ -66,8 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (isStorageExist()) {
         loadDataFromStorage();
-        totalTaskInfoOnMainPage();
         totalTaskInfo();
+        totalTaskInfoOnMainPage();
+        pushNotification();
     };
 });
 
@@ -682,13 +683,13 @@ function totalTaskInfoOnMainPage() {
     const serializedData = localStorage.getItem(STORAGE_KEY);
 
     if (serializedData) {
-        let data = JSON.parse(serializedData);
+        const data = JSON.parse(serializedData);
 
         if (data !== null && location.pathname === '/index.html') {
-            let taskUncompletes = data.filter(task => !task.isComplete);
+            const taskUncompletes = data.filter(task => !task.isComplete);
             document.querySelector('.index-task-uncomplete').textContent = taskUncompletes.length;
 
-            let taskCompletes = data.filter(task => task.isComplete);
+            const taskCompletes = data.filter(task => task.isComplete);
             document.querySelector('.index-task-complete').textContent = taskCompletes.length;
         };
     };
@@ -791,6 +792,52 @@ function searchTask() {
 function isSearchMatch(taskItem, searchInput) {
     const isTaskName = taskItem.taskName;
     return isTaskName.includes(searchInput.toLowerCase());
+};
+
+function pushNotification() {
+    const serializedData = localStorage.getItem(STORAGE_KEY);
+    if (serializedData) {
+        const data = JSON.parse(serializedData);
+
+        let dates = new Date(), date, month, year;
+        date = dates.getDate().toString();
+        month = dates.getMonth().toString() + 1;
+        year = dates.getFullYear().toString();
+
+        const dateIndicator = `${year}-${month}-${date}`;
+
+        let times = new Date(), hour, minute;
+        hour = times.getHours();
+        minute = times.getMinutes();
+
+        const timeIndicator = `${hour}:${minute}`;
+
+        for (const index of data) {
+            if (dateIndicator === index.taskDateStart && timeIndicator === index.labelTaskTimeStart) {
+                if ('Notification' in window) {
+                    Notification.requestPermission().then(function (permission) {
+                        if (permission === 'granted') {
+                            const options = {
+                                body: `Nama tugas "${index.taskName.toUpperCase()}" menunggu untuk kamu selesaikan sekarang!`,
+                                icon: '/src/asset/task-manager-web-application-icon.png',
+                                vibrate: [200], // Pola getar (ms)
+                            };
+
+                            // Tambahkan suara
+                            const notificationSound = new Audio('/src/asset/audio/sound-notification.wav');
+                            notificationSound.play();
+
+                            const notification = new Notification('Cek Dulu, Yuk!', options);
+
+                            notification.onclick = function () {
+                                window.open('https://task-manager-apps.vercell.app/task-uncomplete.html');
+                            };
+                        }
+                    });
+                };
+            };
+        };
+    };
 };
 
 document.addEventListener(RENDER_EVENT, () => {
