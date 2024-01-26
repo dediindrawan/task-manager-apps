@@ -813,7 +813,7 @@ function pushNotification() {
         const timeIndicator = `${hour}:${minute}`;
 
         for (const index of data) {
-            if (dateIndicator === index.taskDateStart && timeIndicator === index.labelTaskTimeStart) {
+            if (dateIndicator === index.taskDateStart && timeIndicator === index.taskTimeStart) {
                 if ('Notification' in window) {
                     Notification.requestPermission().then(function (permission) {
                         if (permission === 'granted') {
