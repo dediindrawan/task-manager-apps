@@ -672,6 +672,13 @@ html,
   }
 }
 
+@media (min-width: 1024px) {
+  .main-index {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+}
+
 .main-index h1 {
   font-size: 1.25rem;
   line-height: 1.75rem;
@@ -727,7 +734,7 @@ html,
   color: rgb(76 68 170 / var(--tw-text-opacity));
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .button-create-new-task {
     width: 50%;
   }
@@ -763,7 +770,7 @@ html,
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .button-options {
     width: 50%;
   }
@@ -846,6 +853,13 @@ html,
   padding-bottom: 2rem;
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .form-main-wrapper {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
 }
 
 .form-main-wrapper h1 {
@@ -983,7 +997,7 @@ html,
 }
 
 .wrapper-button-back-to-home {
-  margin-top: 1.75rem;
+  margin-top: 1.25rem;
   display: inline-block;
   width: 100%;
   text-align: center;
@@ -1016,6 +1030,13 @@ html,
   text-align: center;
 }
 
+@media (min-width: 768px) {
+  .task-header {
+    width: 50%;
+    justify-content: center;
+  }
+}
+
 .form-search {
   position: fixed;
   top: 0px;
@@ -1027,6 +1048,12 @@ html,
   --tw-bg-opacity: 1;
   background-color: rgb(76 68 170 / var(--tw-bg-opacity));
   padding: 1rem;
+}
+
+@media (min-width: 768px) {
+  .form-search {
+    right: 66.666667%;
+  }
 }
 
 .form-search-input-section {
@@ -1164,6 +1191,15 @@ html,
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+@media (min-width: 768px) {
+  .block-element {
+    max-height: 100vh;
+    min-height: 100vh;
+    width: 100%;
+    padding: 1rem;
+  }
+}
+
 .task-main-wrapper {
   flex: 1 1 0%;
   border-top-left-radius: 1.5rem;
@@ -1176,6 +1212,16 @@ html,
   padding-right: 1rem;
 }
 
+@media (min-width: 768px) {
+  .task-main-wrapper {
+    height: 100%;
+    overflow-y: auto;
+    border-bottom-right-radius: 1.5rem;
+    border-bottom-left-radius: 1.5rem;
+    padding-top: 0px;
+  }
+}
+
 .task-heading {
   position: relative;
   margin-bottom: 1.25rem;
@@ -1186,6 +1232,17 @@ html,
   text-transform: capitalize;
   --tw-text-opacity: 1;
   color: rgb(76 68 170 / var(--tw-text-opacity));
+}
+
+@media (min-width: 768px) {
+  .task-heading {
+    position: sticky;
+    top: 0px;
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
 }
 
 .task-heading span {
@@ -1203,6 +1260,12 @@ html,
   font-weight: 600;
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+@media (min-width: 768px) {
+  .task-heading span {
+    top: 1.5rem;
+  }
 }
 
 .button-reload {
