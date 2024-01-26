@@ -39,68 +39,66 @@
             <img src="src/asset/image/task-manager-web-application-icon.png" alt="image">
         </header>
 
-        <div class="group-element">
-            <main class="form-main-wrapper">
-                <h1>form tugas</h1>
+        <main class="form-main-wrapper">
+            <h1>form tugas</h1>
 
-                <form id="task-form">
+            <form id="task-form">
+                <section class="input-section">
+                    <label for="task-name">nama tugas</label>
+                    <input type="text" name="nama-tugas" id="task-name" placeholder="Masukkan nama tugas..."
+                        autocomplete="off" autofocus>
+                    <small>error message</small>
+                </section>
+                <section class="input-section">
+                    <label for="task-description">deskripsi
+                        tugas</label>
+                    <textarea name="deskripsi-tugas" id="task-description"
+                        placeholder="Masukkan deskripsi tugas..."></textarea>
+                    <small>error message</small>
+                </section>
+                <span class="wrapper-date-input">
                     <section class="input-section">
-                        <label for="task-name">nama tugas</label>
-                        <input type="text" name="nama-tugas" id="task-name" placeholder="Masukkan nama tugas..."
-                            autocomplete="off" autofocus>
+                        <label for="task-date-start">tanggal
+                            mulai</label>
+                        <input type="date" name="tanggal-mulai" id="task-date-start">
                         <small>error message</small>
                     </section>
                     <section class="input-section">
-                        <label for="task-description">deskripsi
-                            tugas</label>
-                        <textarea name="deskripsi-tugas" id="task-description"
-                            placeholder="Masukkan deskripsi tugas..."></textarea>
+                        <label for="task-time-start">jam
+                            mulai</label>
+                        <input type="time" name="jam-mulai" id="task-time-start">
                         <small>error message</small>
                     </section>
-                    <span class="wrapper-date-input">
-                        <section class="input-section">
-                            <label for="task-date-start">tanggal
-                                mulai</label>
-                            <input type="date" name="tanggal-mulai" id="task-date-start">
-                            <small>error message</small>
-                        </section>
-                        <section class="input-section">
-                            <label for="task-time-start">jam
-                                mulai</label>
-                            <input type="time" name="jam-mulai" id="task-time-start">
-                            <small>error message</small>
-                        </section>
-                    </span>
-                    <span class="wrapper-date-input">
-                        <section class="input-section">
-                            <label for="task-date-end">tanggal
-                                selesai</label>
-                            <input type="date" name="tanggal-selesai" id="task-date-end">
-                            <small>error message</small>
-                        </section>
-                        <section class="input-section">
-                            <label for="task-time-end">jam
-                                selesai</label>
-                            <input type="time" name="jam-selesai" id="task-time-end">
-                            <small>error message</small>
-                        </section>
-                    </span>
-                    <span class="notif-info"><i class="fa-solid fa-triangle-exclamation mr-2"></i>Lengkapi semua kolom
-                        terlebih dahulu</span>
-                    <input type="submit" value="simpan tugas" class="button-save-task">
-                </form>
-
-                <span class="wrapper-button-back-to-home">
-                    <a href="index.html">Kembali ke halaman
-                        utama</a>
                 </span>
-            </main>
+                <span class="wrapper-date-input">
+                    <section class="input-section">
+                        <label for="task-date-end">tanggal
+                            selesai</label>
+                        <input type="date" name="tanggal-selesai" id="task-date-end">
+                        <small>error message</small>
+                    </section>
+                    <section class="input-section">
+                        <label for="task-time-end">jam
+                            selesai</label>
+                        <input type="time" name="jam-selesai" id="task-time-end">
+                        <small>error message</small>
+                    </section>
+                </span>
+                <span class="notif-info"><i class="fa-solid fa-triangle-exclamation mr-2"></i>Lengkapi semua kolom
+                    terlebih dahulu</span>
+                <input type="submit" value="simpan tugas" class="button-save-task">
+            </form>
 
-            <footer class="footer-credits">
-                <h1>made with coffee &copy; <span class="copyright"></span> | <a
-                        href="https://dediindrawan.github.io/personal-portfolio/">dedi indrawan</a></h1>
-            </footer>
-        </div>
+            <span class="wrapper-button-back-to-home">
+                <a href="index.html">Kembali ke halaman
+                    utama</a>
+            </span>
+        </main>
+
+        <footer class="footer-credits">
+            <h1>made with coffee &copy; <span class="copyright"></span> | <a
+                    href="https://dediindrawan.github.io/personal-portfolio/">dedi indrawan</a></h1>
+        </footer>
     </div>
 
     <script src="src/js/app.js"></script>
