@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     totalTaskInfo();
-    totalTaskInfoOnMainPage();
+    // totalTaskInfoOnMainPage();
 });
 
 function validateForm() {
@@ -241,6 +241,14 @@ function loadDataFromStorage() {
     if (data !== null) {
         for (const index of data) {
             tasks.push(index);
+        };
+
+        if (location.pathname === '/index.html') {
+            let taskUncompletes = data.filter(task => !task.isComplete);
+            document.querySelector('.index-task-uncomplete').textContent = taskUncompletes.length;
+
+            let taskCompletes = data.filter(task => task.isComplete);
+            document.querySelector('.index-task-complete').textContent = taskCompletes.length;
         };
     };
 
@@ -679,28 +687,21 @@ function totalTaskInfo() {
     };
 };
 
-function totalTaskInfoOnMainPage() {
-    return new Promise((resolve, reject) => {
-        try {
-            const serializedData = localStorage.getItem(STORAGE_KEY);
+// function totalTaskInfoOnMainPage() {
+//     const serializedData = localStorage.getItem(STORAGE_KEY);
 
-            if (serializedData) {
-                const data = JSON.parse(serializedData);
-                resolve(data);
+//     if (serializedData) {
+//         let data = JSON.parse(serializedData);
 
-                if (data !== null && location.pathname === '/index.html') {
-                    const taskUncompletes = data.filter(task => !task.isComplete);
-                    document.querySelector('.index-task-uncomplete').textContent = taskUncompletes.length;
+//         if (data !== null && location.pathname === '/index.html') {
+//             let taskUncompletes = data.filter(task => !task.isComplete);
+//             document.querySelector('.index-task-uncomplete').textContent = taskUncompletes.length;
 
-                    const taskCompletes = data.filter(task => task.isComplete);
-                    document.querySelector('.index-task-complete').textContent = taskCompletes.length;
-                };
-            };
-        } catch (error) {
-            reject('Gagal memuat data tersimpan');
-        };
-    });
-};
+//             let taskCompletes = data.filter(task => task.isComplete);
+//             document.querySelector('.index-task-complete').textContent = taskCompletes.length;
+//         };
+//     };
+// };
 
 function checkSearchField() {
     searchInputs.forEach(searchInput => {
