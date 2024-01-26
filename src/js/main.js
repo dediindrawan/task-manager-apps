@@ -1,5 +1,49 @@
 'use strict';
 
+// Skrip JavaScript
+if ('Notification' in window) {
+    // Tampilkan konfirmasi saat pengguna masuk ke situs web
+    const userConfirmed = confirm('Apakah kamu ingin menerima notifikasi tugas?');
+
+    if (userConfirmed) {
+        Notification.requestPermission()
+            .then(permission => {
+                if (permission === 'granted') {
+                    console.log('Izin notifikasi diberikan.');
+                    // Lanjutkan dengan logika notifikasi push atau langganan jika diperlukan
+                } else {
+                    console.warn('Izin notifikasi tidak diberikan oleh pengguna.');
+                }
+            });
+    } else {
+        console.log('Pengguna menolak notifikasi.');
+        // Handle jika pengguna menolak notifikasi
+    };
+};
+
+function subscribeToPushNotifications() {
+    if ('Notification' in window) {
+        Notification.requestPermission()
+            .then(permission => {
+                if (permission === 'granted') {
+                    navigator.serviceWorker.ready
+                        .then(registration => {
+                            registration.pushManager.subscribe({ userVisibleOnly: true })
+                                .then(subscription => {
+                                    console.log('Berlangganan push:', subscription);
+                                })
+                                .catch(error => {
+                                    console.error('Gagal berlangganan push:', error);
+                                });
+                        });
+                } else {
+                    console.warn('Izin notifikasi tidak diberikan oleh pengguna.');
+                };
+            });
+    };
+};
+subscribeToPushNotifications();
+
 const tasks = [];
 const RENDER_EVENT = 'render-event';
 const SAVED_EVENT = 'saved-event';

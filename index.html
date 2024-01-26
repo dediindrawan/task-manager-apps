@@ -28,30 +28,6 @@
     <link rel="stylesheet" href="src/css/style.css">
     <!-- connecting to font awesome icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-    <script>
-        function subscribeToPushNotifications() {
-            if ('Notification' in window) {
-                Notification.requestPermission()
-                    .then(permission => {
-                        if (permission === 'granted') {
-                            navigator.serviceWorker.ready
-                                .then(registration => {
-                                    registration.pushManager.subscribe({ userVisibleOnly: true })
-                                        .then(subscription => {
-                                            console.log('Berlangganan push:', subscription);
-                                        })
-                                        .catch(error => {
-                                            console.error('Gagal berlangganan push:', error);
-                                        });
-                                });
-                        } else {
-                            console.warn('Izin notifikasi tidak diberikan oleh pengguna.');
-                        };
-                    });
-            };
-        };
-        subscribeToPushNotifications();
-    </script>
 </head>
 
 <body>
