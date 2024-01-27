@@ -63,6 +63,30 @@
     @apply py-2 px-4 text-xs text-center capitalize bg-white;
   }
 
+  .apps-info {
+    @apply pt-10 pb-4 px-4 text-xs rounded-t-3xl fixed bottom-0 text-white bg-darken;
+  }
+
+  .apps-info h1 {
+    @apply mb-4 uppercase underline font-bold text-center;
+  }
+
+  .button-close-apps-info {
+    @apply text-xl absolute top-4 right-4;
+  }
+
+  .button-never-show-apps-info-wrapper {
+    @apply w-full inline-block mt-8 text-center;
+  }
+
+  .button-never-show-apps-info {
+    @apply py-2 px-4 capitalize rounded-md bg-primary hover:bg-white hover:text-primary transition-all duration-300 ease-in-out;
+  }
+
+  .close-apps-info {
+    @apply translate-y-full transition-all duration-300 ease-in-out;
+  }
+
   /********** FORM-TODOLIST.HTML PAGE STYLE **********/
   .toast {
     @apply p-4 text-sm text-center -translate-y-full fixed top-0 right-0 left-0 z-20 bg-warning transition-all duration-300 ease-in-out;

@@ -1,18 +1,44 @@
-const buttonNavbars = document.querySelectorAll('.button-navbar');
-buttonNavbars.forEach(buttonNavbar => {
-    buttonNavbar.addEventListener('click', () => {
-        const stickyNavbars = document.querySelectorAll('.sticky-navbar');
-        stickyNavbars.forEach(stickyNavbar => {
-            stickyNavbar.classList.toggle('show-navbar');
+const appsInfo = document.querySelector('.apps-info');
 
-            if (stickyNavbar.classList.contains('show-navbar')) {
-                buttonNavbar.innerHTML = `<i class="fa-solid fa-angles-left"></i>`;
-            } else {
-                buttonNavbar.innerHTML = `<i class="fa-solid fa-angles-right"></i>`;
-            };
+function closeAppsInfo() {
+    appsInfo.classList.add('close-apps-info');
+};
+
+function popupAppsInfo() {
+    const buttonNeverShowAppsInfo = document.querySelector('.button-never-show-apps-info');
+    const neverShowInfo = localStorage.getItem('Never_Show_Apps_Info');
+
+    if (location.pathname === '/index.html') {
+        if (neverShowInfo) {
+            appsInfo.classList.add('close-apps-info');
+        };
+
+        buttonNeverShowAppsInfo.addEventListener('click', () => {
+            appsInfo.classList.add('close-apps-info');
+            localStorage.setItem('Never_Show_Apps_Info', 'true');
+        });
+    };
+};
+popupAppsInfo();
+
+function stickyNavbar() {
+    const buttonNavbars = document.querySelectorAll('.button-navbar');
+    buttonNavbars.forEach(buttonNavbar => {
+        buttonNavbar.addEventListener('click', () => {
+            const stickyNavbars = document.querySelectorAll('.sticky-navbar');
+            stickyNavbars.forEach(stickyNavbar => {
+                stickyNavbar.classList.toggle('show-navbar');
+
+                if (stickyNavbar.classList.contains('show-navbar')) {
+                    buttonNavbar.innerHTML = `<i class="fa-solid fa-angles-left"></i>`;
+                } else {
+                    buttonNavbar.innerHTML = `<i class="fa-solid fa-angles-right"></i>`;
+                };
+            });
         });
     });
-});
+};
+stickyNavbar();
 
 function displayDate() {
     const daily = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
