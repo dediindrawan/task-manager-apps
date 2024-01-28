@@ -632,8 +632,17 @@ html,
      object-fit: cover;
 }
 
-.group-element {
-  @applylg:w-3 /5 lg:p-8 lg:min-h-screen lg:bg-primary lg:flex lg:flex-col lg:justify-between;
+@media (min-width: 1024px) {
+  .group-element {
+    display: flex;
+    min-height: 100vh;
+    width: 60%;
+    flex-direction: column;
+    justify-content: space-between;
+    --tw-bg-opacity: 1;
+    background-color: rgb(76 68 170 / var(--tw-bg-opacity));
+    padding: 2rem;
+  }
 }
 
 .main-index {
