@@ -20,7 +20,7 @@
   }
 
   .header {
-    @apply flex-1 p-4 text-center flex flex-col justify-center;
+    @apply flex-1 p-4 text-center flex flex-col justify-center lg:flex-none lg:w-2/5;
   }
 
   .header h1 {

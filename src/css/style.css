@@ -615,6 +615,13 @@ html,
   text-align: center;
 }
 
+@media (min-width: 1024px) {
+  .header {
+    width: 40%;
+    flex: none;
+  }
+}
+
 .header h1 {
   font-size: 0.875rem;
   line-height: 1.25rem;
