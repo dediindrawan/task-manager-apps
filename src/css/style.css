@@ -633,21 +633,7 @@ html,
 }
 
 .group-element {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-@media (min-width: 1024px) {
-  .group-element {
-    display: flex;
-    min-height: 100vh;
-    width: 60%;
-    flex-direction: column;
-    justify-content: space-between;
-    --tw-bg-opacity: 1;
-    background-color: rgb(76 68 170 / var(--tw-bg-opacity));
-    padding: 2rem;
-  }
+  @applylg:w-3 /5 lg:p-8 lg:min-h-screen lg:bg-primary lg:flex lg:flex-col lg:justify-between;
 }
 
 .main-index {
@@ -1234,11 +1220,6 @@ html,
   font-weight: 600;
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.task-group-element {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
 @media (min-width: 1024px) {

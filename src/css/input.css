@@ -32,7 +32,7 @@
   }
 
   .group-element {
-    @apply bg-white lg:w-3/5 lg:p-8 lg:min-h-screen lg:bg-primary lg:flex lg:flex-col lg:justify-between;
+    @applylg:w-3 /5 lg:p-8 lg:min-h-screen lg:bg-primary lg:flex lg:flex-col lg:justify-between;
   }
 
   .main-index {
@@ -234,7 +234,7 @@
   }
 
   .task-group-element {
-    @apply bg-white lg:w-3/5 lg:p-8 lg:min-h-screen lg:max-h-screen lg:bg-primary;
+    @apply lg:w-3/5 lg:p-8 lg:min-h-screen lg:max-h-screen lg:bg-primary;
   }
 
   .task-main-wrapper {
