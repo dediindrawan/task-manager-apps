@@ -20,7 +20,7 @@
   }
 
   .header {
-    @apply flex-1 p-4 text-center flex flex-col justify-center lg:flex-none lg:w-2/5;
+    @apply flex-1 p-4 text-center flex flex-col justify-center md:flex-none md:h-1/3 lg:w-2/5 lg:h-screen;
   }
 
   .header h1 {
@@ -28,7 +28,7 @@
   }
 
   .header img {
-    @apply w-1/2 mx-auto aspect-square object-cover;
+    @apply w-1/2 mx-auto aspect-square object-cover md:w-1/3 lg:w-1/2;
   }
 
   .group-element {
@@ -36,7 +36,7 @@
   }
 
   .main-index {
-    @apply flex-1 py-6 px-4 text-center flex flex-col items-center rounded-t-3xl text-darken bg-white lg:justify-center;
+    @apply flex-1 py-6 px-4 text-center flex flex-col items-center rounded-t-3xl text-darken bg-white md:justify-center;
   }
 
   .main-index h1 {
@@ -101,7 +101,7 @@
   }
 
   .form-main-wrapper {
-    @apply flex-1 py-8 px-4 rounded-t-3xl bg-white;
+    @apply flex-1 py-8 px-4 rounded-t-3xl bg-white md:flex md:flex-col md:justify-center;
   }
 
   .form-main-wrapper h1 {
@@ -166,7 +166,7 @@
 
   /********** TASK-UNCOMPLETE.HTML PAGE STYLE **********/
   .task-header {
-    @apply p-4 text-center flex flex-col justify-start relative lg:w-2/5 lg:justify-center;
+    @apply p-4 text-center flex flex-col justify-start relative md:flex-none md:h-1/2 lg:flex lg:w-2/5 lg:h-screen lg:justify-center;
   }
 
   .form-search {
@@ -202,7 +202,7 @@
   }
 
   .banner-image img {
-    @apply w-full aspect-video;
+    @apply w-full aspect-video md:w-1/2 md:mx-auto lg:w-full;
   }
 
   .sticky-navbar {
