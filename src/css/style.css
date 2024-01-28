@@ -632,6 +632,12 @@ html,
      object-fit: cover;
 }
 
+.group-element {
+  display: flex;
+  flex: 1 1 0%;
+  flex-direction: column;
+}
+
 @media (min-width: 1024px) {
   .group-element {
     display: flex;
@@ -1229,6 +1235,12 @@ html,
   font-weight: 600;
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.task-group-element {
+  display: flex;
+  flex: 1 1 0%;
+  flex-direction: column;
 }
 
 @media (min-width: 1024px) {
