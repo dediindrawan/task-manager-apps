@@ -36,7 +36,7 @@
   }
 
   .main-index {
-    @apply flex-1 py-6 px-4 text-center flex flex-col items-center rounded-t-3xl text-darken bg-white;
+    @apply flex-1 py-6 px-4 text-center flex flex-col items-center rounded-t-3xl text-darken bg-white lg:justify-center;
   }
 
   .main-index h1 {

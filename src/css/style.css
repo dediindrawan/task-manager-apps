@@ -669,6 +669,12 @@ html,
   color: rgb(14 25 77 / var(--tw-text-opacity));
 }
 
+@media (min-width: 1024px) {
+  .main-index {
+    justify-content: center;
+  }
+}
+
 .main-index h1 {
   font-size: 1.25rem;
   line-height: 1.75rem;
