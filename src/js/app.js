@@ -1,3 +1,4 @@
+// popup of informasi aplikasi on file index.html
 const appsInfo = document.querySelector('.apps-info');
 
 function closeAppsInfo() {
@@ -13,6 +14,7 @@ function popupAppsInfo() {
             appsInfo.classList.add('close-apps-info');
         };
 
+        // saved changes to local storage
         buttonNeverShowAppsInfo.addEventListener('click', () => {
             appsInfo.classList.add('close-apps-info');
             localStorage.setItem('Never_Show_Apps_Info', 'true');
@@ -21,6 +23,7 @@ function popupAppsInfo() {
 };
 popupAppsInfo();
 
+// sticky navbar is activated on task-uncomplete.html and task-complete.html
 function stickyNavbar() {
     const buttonNavbars = document.querySelectorAll('.button-navbar');
     buttonNavbars.forEach(buttonNavbar => {
@@ -40,6 +43,7 @@ function stickyNavbar() {
 };
 stickyNavbar();
 
+// display date information on task-uncomplete.html and task-complete.html 
 function displayDate() {
     const daily = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
 
@@ -63,6 +67,7 @@ function displayDate() {
 };
 displayDate();
 
+// display time information on task-uncomplete.html and task-complete.html 
 function displayTimer() {
     let date = new Date(), hours, minutes, seconds;
     hours = set(date.getHours());
@@ -79,6 +84,7 @@ function displayTimer() {
 displayTimer();
 
 function set(timer) {
+    // added string "0" if hours, minutes, or seconds less than 10 
     timer = timer < 10 ? '0' + timer : timer;
     return timer;
 };

@@ -1,3 +1,4 @@
+// all code here will be on strict mode
 'use strict';
 
 const tasks = [];
@@ -10,8 +11,10 @@ const toasts = document.querySelectorAll('.toast');
 const formSearchs = document.querySelectorAll('#form-search');
 const searchInputs = document.querySelectorAll('#search-input');
 
+// set value task index updated to -1 for assign there is have no task is updated
 let taskIndexUpdated = -1;
 
+// check browser is having a local storage
 function isStorageExist() {
     if (typeof (Storage) === undefined) {
         toasts.forEach(toast => {
@@ -24,10 +27,12 @@ function isStorageExist() {
     return true;
 };
 
+// set id for every task item using timestamp
 function generateId() {
     return +new Date();
 };
 
+// this is a key object of array "tasks"
 function generateObject(id, taskName, taskDescription, taskDateStart, taskTimeStart, taskDateEnd, taskTimeEnd, isComplete) {
     return {
         id,
@@ -41,7 +46,9 @@ function generateObject(id, taskName, taskDescription, taskDateStart, taskTimeSt
     };
 };
 
+// event listener for DOM Content Loaded
 document.addEventListener('DOMContentLoaded', () => {
+    // task form
     const taskForm = document.getElementById('task-form');
     if (location.pathname === '/task-form.html') {
         taskForm.addEventListener('submit', (e) => {
@@ -53,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    // form search
     formSearchs.forEach(formSearch => {
         formSearch.addEventListener('submit', (e) => {
             if (!checkSearchField()) {
@@ -64,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // data will be loaded from storage if exist
     if (isStorageExist()) {
         loadDataFromStorage();
         totalTaskInfo();
@@ -71,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 });
 
+// validate form
 function validateForm() {
     const taskNameInput = document.getElementById('task-name');
     const taskDescriptionInput = document.getElementById('task-description');
@@ -174,6 +184,7 @@ function validateForm() {
     };
 };
 
+// add task is activated
 function addTask() {
     const taskNameInput = document.getElementById('task-name').value.trim();
     const taskDescriptionInput = document.getElementById('task-description').value.trim();
@@ -182,7 +193,9 @@ function addTask() {
     const taskDateEndInput = document.getElementById('task-date-end').value;
     const taskTimeEndInput = document.getElementById('task-time-end').value;
 
+    // checking whether a new task is being added or an existing task is being updated
     if (taskIndexUpdated === -1) {
+        // checking if the newly entered task name already exists in the list
         if (tasks.some(task => task.taskName === taskNameInput.toLowerCase())) {
             toasts.forEach(toast => {
                 toast.textContent = `Nama tugas "${taskNameInput.toUpperCase()}" sudah ada didalam daftar. Silakan buat tugas baru dengan nama yang lain.`;
@@ -196,6 +209,7 @@ function addTask() {
             return;
         };
 
+        // creating a unique ID and a new task object
         const generatedID = generateId();
         const tasksObject = generateObject(
             generatedID,
@@ -208,9 +222,11 @@ function addTask() {
             false
         );
 
+        // adding the new task object to the list of tasks
         tasks.push(tasksObject);
     } else {
         taskUpdated(
+            // updating an existing task
             taskNameInput.toLowerCase(),
             taskDescriptionInput,
             taskDateStartInput,
@@ -221,31 +237,42 @@ function addTask() {
     };
 
     saveData();
+
+    // triggering an event to re-render the view
     document.dispatchEvent(new Event(RENDER_EVENT));
 };
 
+// save data is activated
 function saveData() {
+    // if storage exists, store task items in local storage using the "Storage Key"
     if (isStorageExist()) {
+        // convert the tasks array to a JSON string and store it in local storage
         const parsed = JSON.stringify(tasks);
         localStorage.setItem(STORAGE_KEY, parsed);
 
+        // triggering an event to notify that data has been saved
         document.dispatchEvent(new Event(SAVED_EVENT));
     };
 };
 
+// load data form storage is activated
 function loadDataFromStorage() {
+    // retrieve serialized data from local storage using the "Storage Key"
     const serializedData = localStorage.getItem(STORAGE_KEY);
     const data = JSON.parse(serializedData);
 
+    // if data is not null, add each item from the parsed data to the tasks array
     if (data !== null) {
         for (const index of data) {
             tasks.push(index);
         };
     };
 
+    // triggering an event to initiate a re-render of the view
     document.dispatchEvent(new Event(RENDER_EVENT));
 };
 
+// display task list is activated
 function displayTaskList(tasksObject) {
     const taskUncompleteContainer = document.querySelector('.task-uncomplete-container');
     const taskCompleteContainer = document.querySelector('.task-complete-container');
@@ -426,6 +453,7 @@ function displayTaskList(tasksObject) {
     return listContainer;
 };
 
+// mark taks item status is complete
 function popupConfirmCheck(id, taskName) {
     const confirmCheck = confirm(`Apa kamu yakin ingin menandai status "${taskName.toUpperCase()}" sebagai tugas selesai?`);
 
@@ -437,6 +465,7 @@ function popupConfirmCheck(id, taskName) {
 };
 
 function markTaskCompleted(id, taskName) {
+    // function to find a task by its ID in the tasks array
     const taskTarget = findTaskId(id);
 
     if (taskTarget == null) return;
@@ -459,6 +488,7 @@ function markTaskCompleted(id, taskName) {
     document.dispatchEvent(new Event(RENDER_EVENT));
 };
 
+// mark taks item status is uncomplete or bring back the task item to task uncomplete page
 function popupConfirmUndo(id, taskName) {
     const confirmUndo = confirm(`Apa kamu yakin ingin mengubah status "${taskName.toUpperCase()}" sebagai tugas belum selesai?`);
 
@@ -470,6 +500,7 @@ function popupConfirmUndo(id, taskName) {
 };
 
 function markTaskUncompleted(id, taskName) {
+    // function to find a task by its ID in the tasks array
     const taskTarget = findTaskId(id);
 
     if (taskTarget == null) return;
@@ -492,6 +523,7 @@ function markTaskUncompleted(id, taskName) {
     document.dispatchEvent(new Event(RENDER_EVENT));
 };
 
+// find task id is activated
 function findTaskId(id) {
     for (const taskItem of tasks) {
         if (taskItem.id === id) {
@@ -502,12 +534,14 @@ function findTaskId(id) {
     return null;
 };
 
+// update confirmation popup
 function popupConfirmUpdate(id, taskName, taskDescription, taskDateStart, taskTimeStart, taskDateEnd, taskTimeEnd) {
     const confirmUpdate = confirm(`Apa kamu yakin ingin melakukan perubahan pada nama tugas "${taskName.toUpperCase()}"?`);
 
     if (confirmUpdate) {
         location.href = '/task-form.html';
 
+        // store task information in local storage for updating
         localStorage.setItem('Get_Task_Item_For_Update', JSON.stringify({
             id,
             taskName,
@@ -522,19 +556,23 @@ function popupConfirmUpdate(id, taskName, taskDescription, taskDateStart, taskTi
     };
 };
 
+// event listener for DOM Content Loaded
 document.addEventListener('DOMContentLoaded', () => {
     if (location.pathname === '/task-form.html') {
+        // retrieve task information from local storage for updating
         const getTaskItemForUpdate = localStorage.getItem('Get_Task_Item_For_Update');
 
         if (getTaskItemForUpdate) {
             const data = JSON.parse(getTaskItemForUpdate);
             getTaskItemSelected(data);
 
+            // remove the stored task information from local storage
             localStorage.removeItem('Get_Task_Item_For_Update');
         };
     };
 });
 
+// get task item selected is activated
 function getTaskItemSelected(data) {
     const taskNameInput = document.getElementById('task-name');
     const taskDescriptionInput = document.getElementById('task-description');
@@ -553,10 +591,14 @@ function getTaskItemSelected(data) {
     taskIndexUpdated = data.id;
 };
 
+// task updated is activated
 function taskUpdated(taskNameInput, taskDescriptionInput, taskDateStartInput, taskTimeStartInput, taskDateEndInput, taskTimeEndInput) {
+    // find the task in the tasks array based on the stored task index updated
     let taskItem = tasks.find(task => task.id === taskIndexUpdated);
 
+    // check if a valid task index is stored not -1
     if (taskIndexUpdated !== -1) {
+        // if the task is found in the tasks array
         if (taskItem) {
             taskItem.taskName = taskNameInput;
             taskItem.taskDescription = taskDescriptionInput;
@@ -567,11 +609,13 @@ function taskUpdated(taskNameInput, taskDescriptionInput, taskDateStartInput, ta
         };
     };
 
+    // Reset the taskItem variable to -1 might be intended to clear it
     taskItem = -1;
 
     saveUpdate();
 };
 
+// save update is activated
 function saveUpdate() {
     saveData();
 
@@ -587,6 +631,7 @@ function saveUpdate() {
     });
 };
 
+// remove task item is from array
 function popupConfirmRemove(id, taskName) {
     const confirmRemove = confirm(`Apa kamu yakin ingin menghapus "${taskName.toUpperCase()}" dari daftar tugas?`);
 
@@ -597,9 +642,12 @@ function popupConfirmRemove(id, taskName) {
     };
 };
 
+// task remove is activated
 function taskRemoved(id, taskName) {
+    // find the index of the task item in the tasks array based on this id
     const taskTarget = findTaskIndex(id);
 
+    // if the task item is not found, return without further action
     if (taskTarget === -1) return;
 
     tasks.splice(taskTarget, 1);
@@ -617,9 +665,11 @@ function taskRemoved(id, taskName) {
         }, 3000);
     });
 
+    // trigger an event to initiate a re-render of the view
     document.dispatchEvent(new Event(RENDER_EVENT));
 };
 
+// find task index is activated
 function findTaskIndex(id) {
     for (const index in tasks) {
         if (tasks[index].id === id) {
@@ -627,9 +677,11 @@ function findTaskIndex(id) {
         };
     };
 
+    // if no matching task is found return -1
     return -1;
 };
 
+// total task info is activated
 function totalTaskInfo() {
     if (location.pathname === '/task-uncomplete.html') {
         const taskUncompleteContainer = document.querySelector('.task-uncomplete-container');
@@ -678,6 +730,7 @@ function totalTaskInfo() {
     };
 };
 
+// total task info on main page is activated
 function totalTaskInfoOnMainPage() {
     const serializedData = localStorage.getItem(STORAGE_KEY);
 
@@ -694,6 +747,7 @@ function totalTaskInfoOnMainPage() {
     };
 };
 
+// check search field is activated
 function checkSearchField() {
     searchInputs.forEach(searchInput => {
         const searchErrorMsg = searchInput.nextElementSibling;
@@ -742,6 +796,7 @@ function searchTask() {
 
             for (const taskItem of data) {
                 if (taskItem.isComplete === false && location.pathname === '/task-uncomplete.html') {
+                    // iterating function is search match
                     if (isSearchMatch(taskItem, searchInput)) {
                         const listElement = displayTaskList(taskItem);
 
@@ -756,6 +811,7 @@ function searchTask() {
                         result = true;
                     };
                 } else if (taskItem.isComplete === true && location.pathname === '/task-complete.html') {
+                    // iterating function is search match
                     if (isSearchMatch(taskItem, searchInput)) {
                         const listElement = displayTaskList(taskItem);
 
@@ -788,15 +844,18 @@ function searchTask() {
     });
 };
 
+// is search match is activated
 function isSearchMatch(taskItem, searchInput) {
     const isTaskName = taskItem.taskName;
     return isTaskName.includes(searchInput.toLowerCase());
 };
 
+// event listener for RENDER EVENT
 document.addEventListener(RENDER_EVENT, () => {
     const taskUncompleteContainer = document.querySelector('.task-uncomplete-container');
     const taskCompleteContainer = document.querySelector('.task-complete-container');
 
+    // sorting tasks based on taskDateStart
     tasks.sort(function (a, b) {
         const dateA = new Date(a.taskDateStart);
         const dateB = new Date(b.taskDateStart);
@@ -804,6 +863,7 @@ document.addEventListener(RENDER_EVENT, () => {
     });
 
     for (const taskItem of tasks) {
+        // displaying the task in a list element using displayTaskList
         const listElement = displayTaskList(taskItem);
 
         if (taskItem.isComplete === false) {

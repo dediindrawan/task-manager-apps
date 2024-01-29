@@ -31,25 +31,33 @@
 </head>
 
 <body>
+    <!-- form main container start -->
     <div class="form-main-container">
+        <!-- toast -->
         <div class="toast"></div>
 
+        <!-- header -->
         <header class="header">
             <h1>task manager web application</h1>
             <img src="src/asset/image/task-manager-web-application-icon.png" alt="image">
         </header>
 
+        <!-- group element -->
         <div class="group-element">
+            <!-- form main wrapper -->
             <main class="form-main-wrapper">
                 <h1>form tugas</h1>
 
+                <!-- task form -->
                 <form id="task-form">
+                    <!-- input section -->
                     <section class="input-section">
                         <label for="task-name">nama tugas</label>
                         <input type="text" name="nama-tugas" id="task-name" placeholder="Masukkan nama tugas..."
                             autocomplete="off" autofocus>
                         <small>error message</small>
                     </section>
+                    <!-- input section -->
                     <section class="input-section">
                         <label for="task-description">deskripsi
                             tugas</label>
@@ -57,13 +65,17 @@
                             placeholder="Masukkan deskripsi tugas..."></textarea>
                         <small>error message</small>
                     </section>
+
+                    <!-- wrapper date input -->
                     <span class="wrapper-date-input">
+                        <!-- input section -->
                         <section class="input-section">
                             <label for="task-date-start">tanggal
                                 mulai</label>
                             <input type="date" name="tanggal-mulai" id="task-date-start">
                             <small>error message</small>
                         </section>
+                        <!-- input section -->
                         <section class="input-section">
                             <label for="task-time-start">jam
                                 mulai</label>
@@ -71,13 +83,17 @@
                             <small>error message</small>
                         </section>
                     </span>
+
+                    <!-- wrapper date input -->
                     <span class="wrapper-date-input">
+                        <!-- input section -->
                         <section class="input-section">
                             <label for="task-date-end">tanggal
                                 selesai</label>
                             <input type="date" name="tanggal-selesai" id="task-date-end">
                             <small>error message</small>
                         </section>
+                        <!-- input section -->
                         <section class="input-section">
                             <label for="task-time-end">jam
                                 selesai</label>
@@ -85,24 +101,30 @@
                             <small>error message</small>
                         </section>
                     </span>
+
+                    <!-- notif info -->
                     <span class="notif-info"><i class="fa-solid fa-triangle-exclamation mr-2"></i>Lengkapi semua kolom
                         terlebih dahulu</span>
                     <input type="submit" value="simpan tugas" class="button-save-task">
                 </form>
 
+                <!-- wrapper button back to home -->
                 <span class="wrapper-button-back-to-home">
                     <a href="index.html">Kembali ke halaman
                         utama</a>
                 </span>
             </main>
 
+            <!-- footer credits -->
             <footer class="footer-credits">
                 <h1>made with coffee &copy; <span class="copyright"></span> | <a
                         href="https://dediindrawan.github.io/personal-portfolio/">dedi indrawan</a></h1>
             </footer>
         </div>
     </div>
+    <!-- form main container end -->
 
+    <!-- connecting to javascript file -->
     <script src="src/js/app.js"></script>
     <script src="src/js/main.js"></script>
 </body>
