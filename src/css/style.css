@@ -585,7 +585,7 @@ html,
   }
 }
 
-/********** INDEX.HTML PAGE STYLE **********/
+/********** INDEX.HTML PAGE STYLE || (form-main-container - task-form.html) || (task-main-container - task-complete-container && task-uncomplete-container) **********/
 
 .index-main-container,
   .form-main-container,
@@ -902,7 +902,7 @@ html,
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/********** FORM-TODOLIST.HTML PAGE STYLE **********/
+/********** TASK-FORM.HTML PAGE STYLE **********/
 
 .toast {
   position: fixed;
@@ -1105,7 +1105,7 @@ html,
   text-decoration-line: none;
 }
 
-/********** TASK-UNCOMPLETE.HTML PAGE STYLE **********/
+/********** TASK-UNCOMPLETE.HTML PAGE STYLE && TASK-COMPLETE.HTML PAGE STYLE **********/
 
 .task-header {
   position: relative;
@@ -1567,12 +1567,16 @@ html,
   background-color: rgb(253 110 116 / var(--tw-bg-opacity));
 }
 
-/********** COMPLETED-TODOLIST.HTML PAGE STYLE **********/
+/********** TASK-COMPLETE.HTML PAGE STYLE (additional class) **********/
 
 .task-completed {
   font-style: italic;
   text-decoration-line: line-through;
   opacity: 0.65;
+}
+
+.sticky {
+  position: sticky;
 }
 
 .mr-2 {
